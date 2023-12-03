@@ -31,7 +31,7 @@ class Branch(models.Model):
         verbose_name_plural = 'Разделы'
 
 
-class Materials(models.Model):
+class Material(models.Model):
     title = models.CharField(max_length=300, verbose_name='Название')
     link = models.URLField(max_length=300, verbose_name='Ссылка на видео', **NULLABLE)
     text = models.TextField(verbose_name='Текст статьи', **NULLABLE)
@@ -44,5 +44,5 @@ class Materials(models.Model):
         return f'{self.title}'
 
     class Meta:
-        verbose_name = 'Материалы'
+        verbose_name = 'Материал'
         verbose_name_plural = 'Материалы'
