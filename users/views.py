@@ -1,6 +1,7 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
+from education.permissions import IsTeacher, IsModerator
 from users.models import User
 from users.permissions import IsUser
 from users.serializers import UserSerializer
@@ -20,7 +21,7 @@ class UserListAPIView(generics.ListAPIView):
     """Эндпоинт вывода списка юзеров"""
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminUser | IsTeacher | IsModerator]
 
 
 class UserRetrieveAPIView(generics.RetrieveAPIView):

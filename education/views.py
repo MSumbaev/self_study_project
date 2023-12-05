@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from education.models import Subject, Branch, Material
 from education.paginators import MaterialsPaginator
+from education.permissions import IsModerator, IsTeacher, IsNotModerator, IsOwner
 from education.serializers import SubjectSerializer, BranchSerializer, MaterialSerializer
 
 
@@ -36,7 +37,7 @@ class BranchRetrieveAPIView(generics.RetrieveAPIView):
 # --------------------Material--------------------
 class MaterialCreateAPIView(generics.CreateAPIView):
     serializer_class = MaterialSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsTeacher | IsNotModerator]
 
     def perform_create(self, serializer):
         material = serializer.save()
@@ -60,9 +61,9 @@ class MaterialRetrieveAPIView(generics.RetrieveAPIView):
 class MaterialUpdateAPIView(generics.UpdateAPIView):
     serializer_class = MaterialSerializer
     queryset = Material.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwner | IsModerator]
 
 
 class MaterialDestroyAPIView(generics.DestroyAPIView):
     queryset = Material.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwner]
