@@ -35,7 +35,7 @@ class UserUpdateAPIView(generics.UpdateAPIView):
     """Эндпоинт обновления юзера"""
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = [IsAuthenticated, IsUser]
+    permission_classes = [IsAuthenticated, IsUser | IsModerator]
 
 
 class UserDestroyAPIView(generics.DestroyAPIView):

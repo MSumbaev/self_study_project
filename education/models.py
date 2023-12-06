@@ -18,7 +18,7 @@ class Subject(models.Model):
 
 
 class Branch(models.Model):
-    title = models.CharField(max_length=150,unique=True, verbose_name='Название')
+    title = models.CharField(max_length=150, unique=True, verbose_name='Название')
     description = models.TextField(verbose_name='Описание', **NULLABLE)
 
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, verbose_name='Предмет', **NULLABLE)
