@@ -1,11 +1,11 @@
-from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
 from education.models import Subject, Branch, Material
 from education.paginators import MaterialsPaginator
 from education.permissions import IsModerator, IsTeacher, IsNotModerator, IsOwner
-from education.serializers import SubjectSerializer, BranchSerializer, MaterialSerializer
+from education.serializers import SubjectSerializer, BranchSerializer, MaterialSerializer, SubjectDetailSerializer, \
+    BranchDetailSerializer
 
 
 # --------------------Subject--------------------
@@ -16,7 +16,7 @@ class SubjectListAPIView(generics.ListAPIView):
 
 
 class SubjectRetrieveAPIView(generics.RetrieveAPIView):
-    serializer_class = SubjectSerializer
+    serializer_class = SubjectDetailSerializer
     queryset = Subject.objects.all()
     permission_classes = [IsAuthenticated]
 
@@ -29,7 +29,7 @@ class BranchListAPIView(generics.ListAPIView):
 
 
 class BranchRetrieveAPIView(generics.RetrieveAPIView):
-    serializer_class = BranchSerializer
+    serializer_class = BranchDetailSerializer
     queryset = Branch.objects.all()
     permission_classes = [IsAuthenticated]
 

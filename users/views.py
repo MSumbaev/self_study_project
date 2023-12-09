@@ -42,3 +42,5 @@ class UserDestroyAPIView(generics.DestroyAPIView):
     """Эндпоинт удаления юзера"""
     queryset = User.objects.all()
     permission_classes = [IsAuthenticated, IsUser]
+
+
