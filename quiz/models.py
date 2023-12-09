@@ -25,17 +25,8 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     """Модель вопроса"""
-
-    question_types = (
-        ('one_option', 'единственный вариант'),
-        ('multiply_options', 'несколько вариантов'),
-        ('text', 'ответ текстом'),
-    )
-
     quiz = models.ForeignKey(Quiz, on_delete=models.SET_NULL, verbose_name='Тест', **NULLABLE)
-    question_type = models.CharField(max_length=20, choices=question_types,
-                                     default='one_option', verbose_name='Тип вопроса')
-    question_text = models.CharField(max_length='1000', verbose_name='Текст вопроса')
+    question_text = models.CharField(max_length=1000, verbose_name='Текст вопроса')
 
     def __str__(self):
         return f'{self.question_text}'
@@ -48,7 +39,7 @@ class Question(models.Model):
 class Choice(models.Model):
     """Модель ответа"""
     question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name='Вопрос', **NULLABLE)
-    choice_text = models.CharField(max_length='1000', verbose_name='Текст ответа')
+    choice_text = models.CharField(max_length=1000, verbose_name='Текст ответа')
     is_right = models.BooleanField(default=False, verbose_name='Правильность ответа')
 
     def __str__(self):
@@ -65,18 +56,9 @@ class StudentAnswer(models.Model):
     student = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name='Студент', **NULLABLE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name='Вопрос', **NULLABLE)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE, verbose_name='Текст ответа', **NULLABLE)
-    answer_text = models.TextField(verbose_name='Текст ответа студента', **NULLABLE)
-
-    def clean(self):
-        """Проверка полей choice и answer_text. Должен быть указан хотя бы один ответ"""
-        super().clean()
-        if not any([self.choice, self.answer_text]):
-            raise ValidationError(
-                'Должен быть указан хотя бы один из choice или answer_text'
-            )
 
     def __str__(self):
-        return f'{self.student} - {self.question} - {self.choice or self.answer_text}'
+        return f'{self.student} - {self.question} - {self.choice}'
 
     class Meta:
         verbose_name = 'Ответ студента'
