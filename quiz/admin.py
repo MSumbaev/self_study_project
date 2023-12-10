@@ -23,12 +23,12 @@ class QuestionAdmin(admin.ModelAdmin):
 
 
 @admin.register(Choice)
-class AnswerAdmin(admin.ModelAdmin):
+class ChoiceAdmin(admin.ModelAdmin):
     list_display = ('choice_text', 'is_right', 'question',)
     list_filter = ('question', 'is_right')
 
 
 @admin.register(StudentAnswer)
-class AnswerAdmin(admin.ModelAdmin):
+class StudentAnswerAdmin(admin.ModelAdmin):
     list_display = ('pk', 'quiz', 'student', 'question', 'choice',)
     list_filter = ('student', 'quiz', 'question',)

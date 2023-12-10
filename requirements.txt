@@ -6,3 +6,4 @@ djangorestframework-simplejwt
 ipython
 django-filter
 coverage
+flake8
