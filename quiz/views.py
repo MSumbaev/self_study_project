@@ -29,7 +29,7 @@ class QuizQuestionsListAPIView(generics.ListAPIView):
         return queryset
 
 
-class AnswerTrakerView(APIView):
+class SubmitStudentAnswers(APIView):
     """Collecting customers answers"""
     permission_classes = [IsAuthenticated]
 

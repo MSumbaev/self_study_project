@@ -54,8 +54,9 @@ class ReportSerializer(serializers.ModelSerializer):
         count_right_answr = 0
         for question in questions:
             r_choice = question.choice_set.get(is_right=True)
-            for student_choice in student_choices.filter(question=question):
-                if student_choice.choice == r_choice:
-                    count_right_answr += 1
+            if student_choices.filter(question=question):
+                for student_choice in student_choices.filter(question=question):
+                    if student_choice.choice == r_choice:
+                        count_right_answr += 1
 
         return f'Вы ответили правильно на {count_right_answr} вопросов из {questions_count}!'
