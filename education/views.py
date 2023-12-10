@@ -1,4 +1,6 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.permissions import IsAuthenticated
 
 from education.models import Subject, Branch, Material
@@ -13,6 +15,8 @@ class SubjectListAPIView(generics.ListAPIView):
     serializer_class = SubjectSerializer
     queryset = Subject.objects.all()
     permission_classes = [IsAuthenticated]
+    filter_backends = [SearchFilter]
+    search_fields = ('title', 'description',)
 
 
 class SubjectRetrieveAPIView(generics.RetrieveAPIView):
@@ -26,6 +30,9 @@ class BranchListAPIView(generics.ListAPIView):
     serializer_class = BranchSerializer
     queryset = Branch.objects.all()
     permission_classes = [IsAuthenticated]
+    filter_backends = [SearchFilter, DjangoFilterBackend]
+    search_fields = ('title', 'description',)
+    filterset_fields = ('subject',)
 
 
 class BranchRetrieveAPIView(generics.RetrieveAPIView):
@@ -50,6 +57,10 @@ class MaterialListAPIView(generics.ListAPIView):
     queryset = Material.objects.all()
     permission_classes = [IsAuthenticated]
     pagination_class = MaterialsPaginator
+    filter_backends = [SearchFilter, DjangoFilterBackend, OrderingFilter]
+    search_fields = ('title', 'text',)
+    filterset_fields = ('branch', 'owner',)
+    ordering_fields = ('date_of_last_modification',)
 
 
 class MaterialRetrieveAPIView(generics.RetrieveAPIView):
