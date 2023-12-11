@@ -12,6 +12,7 @@ from education.serializers import SubjectSerializer, BranchSerializer, MaterialS
 
 # --------------------Subject--------------------
 class SubjectListAPIView(generics.ListAPIView):
+    """Эндпоинт вывода списка объектов модели Предмет"""
     serializer_class = SubjectSerializer
     queryset = Subject.objects.all()
     permission_classes = [IsAuthenticated]
@@ -20,6 +21,7 @@ class SubjectListAPIView(generics.ListAPIView):
 
 
 class SubjectRetrieveAPIView(generics.RetrieveAPIView):
+    """Эндпоинт вывода объекта модели Предмет"""
     serializer_class = SubjectDetailSerializer
     queryset = Subject.objects.all()
     permission_classes = [IsAuthenticated]
@@ -27,6 +29,7 @@ class SubjectRetrieveAPIView(generics.RetrieveAPIView):
 
 # --------------------Branch--------------------
 class BranchListAPIView(generics.ListAPIView):
+    """Эндпоинт вывода списка объектов модели Раздел"""
     serializer_class = BranchSerializer
     queryset = Branch.objects.all()
     permission_classes = [IsAuthenticated]
@@ -36,6 +39,7 @@ class BranchListAPIView(generics.ListAPIView):
 
 
 class BranchRetrieveAPIView(generics.RetrieveAPIView):
+    """Эндпоинт вывода объекта модели Раздел"""
     serializer_class = BranchDetailSerializer
     queryset = Branch.objects.all()
     permission_classes = [IsAuthenticated]
@@ -43,6 +47,7 @@ class BranchRetrieveAPIView(generics.RetrieveAPIView):
 
 # --------------------Material--------------------
 class MaterialCreateAPIView(generics.CreateAPIView):
+    """Эндпоинт создания объекта модели Материал"""
     serializer_class = MaterialSerializer
     permission_classes = [IsAuthenticated, IsTeacher | IsNotModerator]
 
@@ -53,6 +58,7 @@ class MaterialCreateAPIView(generics.CreateAPIView):
 
 
 class MaterialListAPIView(generics.ListAPIView):
+    """Эндпоинт вывода списка объектов модели Материал"""
     serializer_class = MaterialSerializer
     queryset = Material.objects.all()
     permission_classes = [IsAuthenticated]
@@ -64,17 +70,20 @@ class MaterialListAPIView(generics.ListAPIView):
 
 
 class MaterialRetrieveAPIView(generics.RetrieveAPIView):
+    """Эндпоинт вывода объекта модели Материал"""
     serializer_class = MaterialSerializer
     queryset = Material.objects.all()
     permission_classes = [IsAuthenticated]
 
 
 class MaterialUpdateAPIView(generics.UpdateAPIView):
+    """Эндпоинт обновления объекта модели Материал"""
     serializer_class = MaterialSerializer
     queryset = Material.objects.all()
     permission_classes = [IsAuthenticated, IsOwner | IsModerator]
 
 
 class MaterialDestroyAPIView(generics.DestroyAPIView):
+    """Эндпоинт удаления объекта модели Материал"""
     queryset = Material.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]

@@ -34,6 +34,7 @@ class StudentAnswerSerializer(serializers.ModelSerializer):
 
 
 class ReportSerializer(serializers.ModelSerializer):
+    """Сериализатор отчета"""
     num_right_answers = serializers.SerializerMethodField()
 
     class Meta:

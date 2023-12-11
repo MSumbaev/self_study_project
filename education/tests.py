@@ -9,6 +9,7 @@ from users.models import User
 
 
 class SubjectListTestCase(APITestCase):
+    """Тесткейс списка модели предмета"""
     def setUp(self):
         self.user = User.objects.create(
             email='test@test.com',
@@ -20,6 +21,7 @@ class SubjectListTestCase(APITestCase):
         )
 
     def test_list_subject(self):
+        """Функция тест списка модели предмета"""
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(
@@ -44,6 +46,7 @@ class SubjectListTestCase(APITestCase):
 
 
 class SubjectRetrieveTestCase(APITestCase):
+    """Тесткейс детального объекта модели предмета"""
     def setUp(self):
         self.user = User.objects.create(
             email='test@test.com',
@@ -53,13 +56,9 @@ class SubjectRetrieveTestCase(APITestCase):
             title='Test subject',
             description='Test description',
         )
-        # self.branch = Branch.objects.create(
-        #     title='Test branch',
-        #     description='Test description',
-        #     subject=self.subject.pk
-        # )
 
     def test_subject_retrieve(self):
+        """Тест функция детального объекта модели раздела"""
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(
@@ -81,6 +80,7 @@ class SubjectRetrieveTestCase(APITestCase):
 
 
 class BranchListTestCase(APITestCase):
+    """Тесткейс списка модели раздела"""
     def setUp(self):
         self.user = User.objects.create(
             email='test@test.com',
@@ -97,6 +97,7 @@ class BranchListTestCase(APITestCase):
         )
 
     def test_list_branch(self):
+        """Тест функция списка модели раздела"""
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(
@@ -123,6 +124,7 @@ class BranchListTestCase(APITestCase):
 
 
 class BranchRetrieveTestCase(APITestCase):
+    """Тесткейс детального объекта модели раздела"""
     def setUp(self):
         self.user = User.objects.create(
             email='test@test.com',
@@ -139,6 +141,7 @@ class BranchRetrieveTestCase(APITestCase):
         )
 
     def test_branch_retrieve(self):
+        """Тест функция детального объекта модели раздела"""
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(
@@ -162,6 +165,7 @@ class BranchRetrieveTestCase(APITestCase):
 
 
 class MaterialCreateTestCase(APITestCase):
+    """Тесткейс создания объекта материала"""
     def setUp(self):
         self.user = User.objects.create(
             email='student@lms.com',
@@ -178,6 +182,7 @@ class MaterialCreateTestCase(APITestCase):
         )
 
     def test_create_material(self):
+        """Тест функция создания объекта материала"""
         self.client.force_authenticate(user=self.user)
 
         data = {
@@ -213,6 +218,7 @@ class MaterialCreateTestCase(APITestCase):
 
 
 class MaterialDestroyTestCase(APITestCase):
+    """Тесткейс удаления объекта материала"""
     def setUp(self):
         self.user = User.objects.create(
             email='student@lms.com',
@@ -235,6 +241,7 @@ class MaterialDestroyTestCase(APITestCase):
         )
 
     def test_material_delete(self):
+        """Тест функция удаления объекта материала"""
         self.client.force_authenticate(user=self.user)
 
         response = self.client.delete(
@@ -251,6 +258,7 @@ class MaterialDestroyTestCase(APITestCase):
 
 
 class MaterialListTestCase(APITestCase):
+    """Тесткейс списка объектов модели материала"""
     def setUp(self):
         self.user = User.objects.create(
             email='student@lms.com',
@@ -277,6 +285,7 @@ class MaterialListTestCase(APITestCase):
         )
 
     def test_list_material(self):
+        """Тест функция списка объектов модели материала"""
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(
@@ -311,6 +320,7 @@ class MaterialListTestCase(APITestCase):
 
 
 class MaterialRetrieveTestCase(APITestCase):
+    """Тесткейс детального объекта модели материала"""
     def setUp(self):
         self.user = User.objects.create(
             email='student@lms.com',
@@ -337,6 +347,7 @@ class MaterialRetrieveTestCase(APITestCase):
         )
 
     def test_material_retrieve(self):
+        """Тест функция детального объекта модели материала"""
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(
@@ -362,6 +373,7 @@ class MaterialRetrieveTestCase(APITestCase):
 
 
 class MaterialUpdateTestCase(APITestCase):
+    """Тесткейс обновления объекта модели материала"""
     def setUp(self):
         self.owner = User.objects.create(
             email='owner@lms.com',
@@ -384,6 +396,7 @@ class MaterialUpdateTestCase(APITestCase):
         )
 
     def test_material_update(self):
+        """Тест функция обновления объекта модели материала"""
         self.client.force_authenticate(user=self.owner)
 
         data = {

@@ -10,6 +10,7 @@ from users.models import User
 
 
 class MaterialQuizListTestCase(APITestCase):
+    """Тесткейс вывода списка опросов принадлежащих материалу"""
     def setUp(self):
         self.user = User.objects.create(
             email='student@lms.com',
@@ -41,6 +42,7 @@ class MaterialQuizListTestCase(APITestCase):
         )
 
     def test_list_quiz(self):
+        """Тест функция вывода списка опросов принадлежащих материалу"""
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(
@@ -68,6 +70,7 @@ class MaterialQuizListTestCase(APITestCase):
 
 
 class QuizQuestionListTestCase(APITestCase):
+    """Тесткейс вывода списка вопросов принадлежащих определенному опросу"""
     def setUp(self):
         self.user = User.objects.create(
             email='student@lms.com',
@@ -113,6 +116,7 @@ class QuizQuestionListTestCase(APITestCase):
         )
 
     def test_list_question(self):
+        """Тест функция вывода списка вопросов принадлежащих определенному опросу"""
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(
@@ -227,6 +231,7 @@ class QuizQuestionListTestCase(APITestCase):
 
 
 class ReportDetailTestCase(APITestCase):
+    """Тесткейс вывода отчета по пройденному опросу"""
     def setUp(self):
         self.user = User.objects.create(
             email='student@lms.com',
@@ -278,6 +283,7 @@ class ReportDetailTestCase(APITestCase):
         )
 
     def test_report_retrieve(self):
+        """Тест функция вывода отчета по пройденному опросу"""
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(

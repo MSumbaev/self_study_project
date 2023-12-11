@@ -6,6 +6,7 @@ NULLABLE = {'null': True, 'blank': True}
 
 
 class Subject(models.Model):
+    """Модель предмета"""
     title = models.CharField(max_length=150, unique=True, verbose_name='Название')
     description = models.TextField(verbose_name='Описание', **NULLABLE)
 
@@ -18,6 +19,7 @@ class Subject(models.Model):
 
 
 class Branch(models.Model):
+    """Модель раздела"""
     title = models.CharField(max_length=150, unique=True, verbose_name='Название')
     description = models.TextField(verbose_name='Описание', **NULLABLE)
 
@@ -32,6 +34,7 @@ class Branch(models.Model):
 
 
 class Material(models.Model):
+    """Модель материала"""
     title = models.CharField(max_length=300, verbose_name='Название')
     link = models.URLField(max_length=300, verbose_name='Ссылка на видео', **NULLABLE)
     text = models.TextField(verbose_name='Текст статьи', **NULLABLE)

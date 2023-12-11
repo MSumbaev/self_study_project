@@ -20,7 +20,7 @@ class MaterialQuizListAPIView(generics.ListAPIView):
 
 
 class QuizQuestionsListAPIView(generics.ListAPIView):
-    """Список вопросов относящихся к указанному тесту(Quiz)(необходимо передать его pk)"""
+    """Список вопросов относящихся к указанному тесту(Quiz)(необходимо передать его pk в url)"""
     serializer_class = QuestionSerializer
     permission_classes = [IsAuthenticated]
 
@@ -30,11 +30,30 @@ class QuizQuestionsListAPIView(generics.ListAPIView):
 
 
 class SubmitStudentAnswers(APIView):
-    """Collecting customers answers"""
+    """Эндпоинт отправки ответов студента на для опроса(Quiz)(необходимо передать его pk в url)."""
     permission_classes = [IsAuthenticated]
 
     def post(self, request: Request, quiz_id: int):
-        """Save the customer's answers"""
+        """Сохранение ответов студента.
+
+        Пример post-запроса:
+        {
+            "answers": [
+                {
+                    "id": 1, # id вопроса
+                    "choice": 1 # id ответа
+                },
+                        {
+                    "id": 2, # id вопроса
+                    "choice": 5 # id ответа
+                },
+                        {
+                    "id": 3, # id вопроса
+                    "choice": 8 # id ответа
+                }
+            ]
+        }
+    """
         questions_count = Question.objects.filter(quiz=quiz_id).count()
 
         if len(request.data['answers']) != questions_count:
@@ -67,6 +86,16 @@ class SubmitStudentAnswers(APIView):
 
 
 class ReportDetailAPIView(generics.RetrieveAPIView):
+    """
+    Эндпоинт вывода отчета на пройденный опрос.
+
+    Пример ответа на запрос:
+    {
+        "title": "Фазовые превращения Тест №1",
+        "material": 2,
+        "num_right_answers": "Вы ответили правильно на 2 вопросов из 3!"
+    }
+    """
     serializer_class = ReportSerializer
     queryset = Quiz.objects.all()
     permission_classes = [IsAuthenticated]
