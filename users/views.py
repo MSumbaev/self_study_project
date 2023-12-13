@@ -4,12 +4,12 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from education.permissions import IsTeacher, IsModerator
 from users.models import User
 from users.permissions import IsUser
-from users.serializers import UserSerializer
+from users.serializers import UserSerializer, UserRegisterSerializer
 
 
 class UserCreateAPIView(generics.CreateAPIView):
     """Эндпоинт создание юзера"""
-    serializer_class = UserSerializer
+    serializer_class = UserRegisterSerializer
 
     def perform_create(self, serializer):
         user = serializer.save()

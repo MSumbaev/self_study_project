@@ -8,3 +8,10 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
+
+
+class UserRegisterSerializer(serializers.ModelSerializer):
+    """Сериализатор модели User для регистрации"""
+    class Meta:
+        model = User
+        fields = ('email', 'password')
