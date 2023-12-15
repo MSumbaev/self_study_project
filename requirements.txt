@@ -8,4 +8,4 @@ django-filter
 coverage
 flake8
 django-cors-headers
-
+drf-yasg
